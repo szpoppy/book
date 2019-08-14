@@ -1,0 +1,1 @@
+# 关于AJAX中的header
