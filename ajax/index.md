@@ -56,7 +56,7 @@ window
 
 ## jsonp
 
-> 相对过时的技术，解决当年无法跨域请求数据问题
+> 相对过时的技术，解决老旧浏览器无法跨域请求数据问题
 
 ```javascript
 // jsonp 只能GET请求
@@ -76,7 +76,10 @@ node.setAttribute("type", "text/javascript");
 // 回调
 node.onload = node.onerror = function() {
     // 正常和异常都能触发
+    // 释放数据获取函数
+    window[callbackMethod] = null;
     // callbackData 为 null 说明没加载到数据
+    // ...
 };
 
 // 异步，默认也是异步
