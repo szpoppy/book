@@ -240,7 +240,256 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="ajax&#x4E2D;&#x7684;&#x6570;&#x636E;">AJAX&#x4E2D;&#x7684;&#x6570;&#x636E;</h1>
+                                <h1 id="ajax-&#x4E2D;&#x7684;&#x6570;&#x636E;">AJAX &#x4E2D;&#x7684;&#x6570;&#x636E;</h1>
+<h2 id="&#x5E38;&#x7528;&#x7684;&#x6570;&#x636E;">&#x5E38;&#x7528;&#x7684;&#x6570;&#x636E;</h2>
+<ul>
+<li>URL &#x67E5;&#x8BE2;&#x5B57;&#x7B26;&#x4E32;(&#x901A;&#x5E38;&#x7528;&#x4E8E; Ajax &#x8BF7;&#x6C42;&#x6570;&#x636E;&#x53C2;&#x6570;)<a href="https://baijiahao.baidu.com/s?id=1619273328999923463&amp;wfr=spider&amp;for=pc" target="_blank">https://baijiahao.baidu.com/s?id=1619273328999923463&amp;wfr=spider&amp;for=pc</a></li>
+<li>JSON JS &#x4E2D;&#x6700;&#x57FA;&#x7840;&#x7684;&#x6570;&#x636E;&#x683C;&#x5F0F;,&#x901A;&#x5E38;&#x7528;&#x4E8E;&#x6570;&#x636E;&#x83B7;&#x53D6;<a href="http://www.json.org" target="_blank">http://www.json.org</a></li>
+<li>XML &#x5728;&#x6CA1;&#x6709; JSON &#x6570;&#x636E;&#x683C;&#x5F0F;&#x5316;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x6700;&#x6D41;&#x884C;&#x7684;&#x4E00;&#x79CD;&#x6570;&#x636E;&#x683C;&#x5F0F;&#xFF0C;&#x73B0;&#x5728;&#x57FA;&#x672C;&#x4E0D;&#x7528;</li>
+<li>FormData &#x7528;&#x4E8E;&#x6A21;&#x62DF;&#x8868;&#x5355;&#x6570;&#x636E;&#xFF0C;&#x901A;&#x5E38;&#x7528;&#x6237;&#x4E0A;&#x4F20;&#x6587;&#x4EF6;&#x65F6;&#x4F7F;&#x7528;</li>
+</ul>
+<h2 id="&#x5176;&#x4ED6;&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x652F;&#x6301;">&#x5176;&#x4ED6;&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x652F;&#x6301;</h2>
+<ul>
+<li>&#x4E0D;&#x662F;&#x5F88;&#x5E38;&#x7528;,&#x8BF7;&#x53C2;&#x7167;<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API/Using_Fetch#Body" target="_blank">https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API/Using_Fetch#Body</a></li>
+</ul>
+<h2 id="url-&#x67E5;&#x8BE2;&#x5B57;&#x7B26;&#x4E32;">URL &#x67E5;&#x8BE2;&#x5B57;&#x7B26;&#x4E32;</h2>
+<ul>
+<li>&#x4EE5;&amp;&#x4F5C;&#x4E3A;&#x5206;&#x9694;&#x7B26;&#xFF0C;=&#x4E3A; key &#x548C; value &#x5206;&#x5272;&#x7684;&#x8FDE;&#x63A5;&#x5B57;&#x7B26;&#x4E32;</li>
+<li>nodejs &#x5DF2;&#x7ECF;&#x539F;&#x751F;&#x5B9E;&#x73B0;<a href="http://nodejs.cn/api/querystring.html" target="_blank">querystring</a><blockquote>
+<p>{x:[1,2]} &#x5C06;&#x89E3;&#x6790;&#x4E3A; x=1&amp;x=2 &#x53CD;&#x4E4B; x=1&amp;x=2 =&gt; {x:[1,2]}</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="&#x7B80;&#x5355;&#x7684;&#x5B9E;&#x73B0;-querystring-&#xFF08;parse&#xFF0C;-stringify&#xFF09;">&#x7B80;&#x5355;&#x7684;&#x5B9E;&#x73B0; querystring &#xFF08;parse&#xFF0C; stringify&#xFF09;</h2>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> querystring = {
+    parse: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">str, opt</span>) </span>{
+        <span class="hljs-keyword">var</span> sep = opt &amp;&amp; opt.sep || <span class="hljs-string">&apos;&amp;&apos;</span>
+        <span class="hljs-keyword">var</span> eq = opt &amp;&amp; opt.eq || <span class="hljs-string">&apos;=&apos;</span>
+        <span class="hljs-keyword">var</span> <span class="hljs-built_in">unescape</span> = opt &amp;&amp; opt.unescape || <span class="hljs-built_in">window</span>.decodeURIComponent
+
+        <span class="hljs-keyword">let</span> data= {}
+        <span class="hljs-comment">// &#x53BB;&#x9664;&#x90E8;&#x5206;&#x6CA1;&#x6709;&#x7684;&#x5B57;&#x7B26;</span>
+        str.replace(<span class="hljs-regexp">/^[\s#?]+/</span>, <span class="hljs-string">&quot;&quot;</span>).split(sep).forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">item</span>)</span>{
+            <span class="hljs-keyword">if</span>(!item) {
+                <span class="hljs-keyword">return</span> ;
+            }
+            <span class="hljs-keyword">let</span> arr = item.split(eq)
+            <span class="hljs-keyword">let</span> key = arr[<span class="hljs-number">0</span>];
+            <span class="hljs-keyword">if</span>(key){
+                <span class="hljs-keyword">let</span> val = <span class="hljs-built_in">unescape</span>(arr[<span class="hljs-number">1</span>] || <span class="hljs-string">&quot;&quot;</span>);
+                <span class="hljs-keyword">if</span> (data[key] === <span class="hljs-literal">undefined</span>) {
+                    <span class="hljs-comment">// &#x8D4B;&#x503C;</span>
+                    data[key] = val;
+                }
+                <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (data[key].push) {
+                    <span class="hljs-comment">// &#x591A;&#x4E2A;&#x76F8;&#x540C;&#x5B57;&#x7B26;</span>
+                    data[key].push(val);
+                }
+                <span class="hljs-keyword">else</span> {
+                    <span class="hljs-comment">// &#x503C;&#x8F6C;&#x5316;&#x4E3A;&#x6570;&#x7EC4;</span>
+                    data[key] = [data[key], val];
+                }
+            }
+        })
+        <span class="hljs-keyword">return</span> data;
+    },
+    stringify: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">json, opt</span>) </span>{
+        <span class="hljs-keyword">var</span> sep = opt &amp;&amp; opt.sep || <span class="hljs-string">&apos;&amp;&apos;</span>
+        <span class="hljs-keyword">var</span> eq = opt &amp;&amp; opt.eq || <span class="hljs-string">&apos;=&apos;</span>
+        <span class="hljs-keyword">var</span> <span class="hljs-built_in">unescape</span> = opt &amp;&amp; opt.unescape || <span class="hljs-built_in">window</span>.decodeURIComponent
+
+        <span class="hljs-keyword">let</span> arr = []
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> n <span class="hljs-keyword">in</span> json){
+            <span class="hljs-keyword">if</span>(json.hasOwnProperty(n)){
+                <span class="hljs-keyword">let</span> item = json[n]
+                <span class="hljs-keyword">if</span>(item == <span class="hljs-literal">null</span>) {
+                    item = <span class="hljs-string">&quot;&quot;</span>;
+                }
+                <span class="hljs-keyword">let</span> key = <span class="hljs-built_in">escape</span>(n)
+                <span class="hljs-keyword">if</span>( item &amp;&amp; item.constructor == <span class="hljs-built_in">Array</span> ){
+                    <span class="hljs-comment">// &#x6570;&#x7EC4;&#x8981;&#x8F6C;&#x5316;&#x4E3A;&#x591A;&#x4E2A;&#x76F8;&#x540C;kv</span>
+                    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; item.length; i += <span class="hljs-number">1</span>) {
+                        arr.push(key + eq + <span class="hljs-built_in">escape</span>(item[i]));
+                    }
+                }
+                <span class="hljs-keyword">else</span>{
+                    <span class="hljs-comment">// &#x76F4;&#x63A5;push</span>
+                    arr.push(key + eq + <span class="hljs-built_in">escape</span>(item));
+                }
+            }
+        }
+        <span class="hljs-keyword">return</span> arr.join(sep)
+    }
+}
+</code></pre>
+<h2 id="json-&#x6570;&#x636E;">JSON &#x6570;&#x636E;</h2>
+<ul>
+<li>JS &#x4E2D;&#x652F;&#x6301;&#x6700;&#x597D;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;</li>
+<li>&#x539F;&#x751F;&#x652F;&#x6301; &#x901A;&#x8FC7; JSON.parse JSON.stringify &#x6765;&#x64CD;&#x4F5C;&#x6570;&#x636E;</li>
+</ul>
+<h2 id="xml-&#x6570;&#x636E;">XML &#x6570;&#x636E;</h2>
+<ul>
+<li>&#x76EE;&#x524D;&#x57FA;&#x672C;&#x4E0A;&#x4E0D;&#x4F7F;&#x7528;&#x4E86;&#xFF0C;XMLHttpRequest &#x7684;&#x8FD4;&#x56DE;&#x6570;&#x636E;&#x4E2D;&#x9ED8;&#x8BA4;&#x5305;&#x542B;&#x6B21;&#x6570;&#x636E;</li>
+<li>&#x6D4F;&#x89C8;&#x5668;&#x90FD;&#x80FD;&#x652F;&#x6301;&#x6B64;&#x6570;&#x636E;&#x683C;&#x5F0F;&#xFF0C;&#x4F46;&#x662F;&#xFF0C;&#x4E0D;&#x540C;&#x6D4F;&#x89C8;&#x5668;&#x4F7F;&#x7528;&#x65B9;&#x5F0F;&#x4E0D;&#x540C;&#xFF0C;&#x9700;&#x8981;&#x517C;&#x5BB9;</li>
+</ul>
+<h2 id="formdata-&#x6570;&#x636E;">FormData &#x6570;&#x636E;</h2>
+<ul>
+<li>H5 &#x6D4F;&#x89C8;&#x5668;&#x90FD;&#x652F;&#x6301;&#xFF0C;&#x4F7F;&#x7528; new window.FormData()</li>
+<li>&#x4E00;&#x822C;&#x4F7F;&#x7528;&#x5728;&#x901A;&#x8FC7; Ajax &#x4E0A;&#x4F20;&#x6587;&#x4EF6;</li>
+</ul>
+<h2 id="&#x52A0;&#x5165;&#x6570;&#x636E;&#x683C;&#x5F0F;&#x652F;&#x6301;&#x7684;-ajax-&#x5E93;&#x7684;&#x5B9E;&#x73B0;">&#x52A0;&#x5165;&#x6570;&#x636E;&#x683C;&#x5F0F;&#x652F;&#x6301;&#x7684; AJAX &#x5E93;&#x7684;&#x5B9E;&#x73B0;</h2>
+<pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">ajax</span>(<span class="hljs-params">options</span>) </span>{
+    <span class="hljs-keyword">var</span> req = {
+        <span class="hljs-comment">// &#x8BF7;&#x6C42;url</span>
+        url: options.url,
+        <span class="hljs-comment">// &#x8BF7;&#x6C42;&#x53C2;&#x6570;</span>
+        param: options.param,
+        <span class="hljs-comment">// &#x8BF7;&#x6C42;&#x5934;</span>
+        header: options.header,
+        <span class="hljs-comment">// &#x8BF7;&#x6C42;&#x65B9;&#x6CD5;</span>
+        method: options.method || <span class="hljs-string">&quot;get&quot;</span>,
+        <span class="hljs-comment">// ajax&#x8BF7;&#x6C42;&#x8D85;&#x65F6;</span>
+        timeout: options.timeout || <span class="hljs-number">0</span>,
+        <span class="hljs-comment">// &#x4E0A;&#x4F20;&#x6570;&#x636E;&#x7C7B;&#x578B; (&#x4E3B;&#x8981;&#x9700;&#x8981;&#x533A;&#x5206; json&#x6570;&#x636E;&#x548C;url&#x67E5;&#x8BE2;&#x5B57;&#x7B26;&#x4E32;)</span>
+        dataType: options.dataType
+    };
+
+    <span class="hljs-comment">// &#x7CFB;&#x7EDF;xhr &#x8BF7;&#x6C42;&#x5BF9;&#x8C61;</span>
+    req.xhr = <span class="hljs-keyword">new</span> <span class="hljs-built_in">window</span>.XMLHttpRequest();
+
+    <span class="hljs-keyword">if</span> (options.onopen) {
+        <span class="hljs-comment">// &#x8FD9;&#x91CC;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x901A;&#x8FC7;&#x6539;&#x53D8;req&#x4E2D;&#x7684;&#x503C;&#xFF0C;&#x6765;&#x6539;&#x53D8;&#x63A5;&#x7EBF;&#x6765;&#x7684;&#x64CD;&#x4F5C;</span>
+        options.onopen(req);
+    }
+
+    <span class="hljs-keyword">var</span> isJSONData = req.dataType == <span class="hljs-string">&quot;json&quot;</span>;
+
+    <span class="hljs-comment">// &#x8BF7;&#x6C42;&#x65B9;&#x6CD5; GET POST PUT &#x7B49;</span>
+    <span class="hljs-keyword">var</span> method = (req.method || <span class="hljs-string">&quot;get&quot;</span>).toUpperCase();
+    <span class="hljs-comment">// &#x53C2;&#x6570;</span>
+    <span class="hljs-keyword">var</span> bodyParam = req.param;
+    <span class="hljs-comment">// &#x53C2;&#x6570;&#x662F;&#x5426;&#x4E3A;object&#x5BF9;&#x8C61;</span>
+    <span class="hljs-keyword">var</span> isParamObj = <span class="hljs-built_in">Object</span>.prototype.toString.call(bodyParam).toLowerCase() == <span class="hljs-string">&apos;[object object]&apos;</span>
+    <span class="hljs-comment">// &#x53C2;&#x6570;&#x662F;&#x5426;&#x4E3A;FormData&#x5BF9;&#x8C61;</span>
+    <span class="hljs-keyword">var</span> isFormData = <span class="hljs-built_in">window</span>.FormData &amp;&amp; req.param <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">window</span>.FormData;
+    <span class="hljs-keyword">if</span> (isParamObj) {
+        bodyParam = isJSONData ? <span class="hljs-built_in">JSON</span>.stringify(req.param) : querystring.stringify(req.param);
+    }
+    <span class="hljs-comment">// &#x53C2;&#x6570;&#x4E3A;&#x5B57;&#x7B26;&#x4E32;</span>
+    <span class="hljs-keyword">var</span> isBodyParamStr = <span class="hljs-keyword">typeof</span> bodyParam == <span class="hljs-string">&apos;string&apos;</span>
+    <span class="hljs-keyword">var</span> url = req.url || <span class="hljs-string">&quot;&quot;</span>;
+    <span class="hljs-keyword">if</span> (method == <span class="hljs-string">&quot;GET&quot;</span>) {
+        <span class="hljs-keyword">if</span>(isBodyParamStr) {
+            <span class="hljs-comment">// &#x5C06;&#x53C2;&#x6570;&#x653E;&#x5230;url&#x4E0A;</span>
+            url = url + (url.indexOf(<span class="hljs-string">&quot;?&quot;</span>) &gt; <span class="hljs-number">-1</span> ? <span class="hljs-string">&quot;&amp;&quot;</span> : <span class="hljs-string">&quot;?&quot;</span>) + bodyParam;
+        }
+        bodyParam = <span class="hljs-literal">null</span>;
+    } <span class="hljs-keyword">else</span> {
+
+        <span class="hljs-keyword">if</span> (header[<span class="hljs-string">&quot;Content-Type&quot;</span>] === <span class="hljs-literal">undefined</span> &amp;&amp; !isFormData) {
+            <span class="hljs-comment">// json &#x9ED8;&#x8BA4;&#x4F7F;&#x7528; application/json</span>
+            header[<span class="hljs-string">&quot;Content-Type&quot;</span>] = isJSONData ? <span class="hljs-string">&quot;application/json&quot;</span> : <span class="hljs-string">&quot;application/x-www-form-urlencoded&quot;</span>;
+        }
+        <span class="hljs-keyword">if</span>(isBodyParamStr) {
+            <span class="hljs-comment">// &#x7279;&#x6B8A;&#x5B57;&#x7B26;&#x8FC7;&#x6EE4;</span>
+            bodyParam = bodyParam.replace(<span class="hljs-regexp">/[\x00-\x08\x11-\x12\x14-\x20]/g</span>, <span class="hljs-string">&quot;*&quot;</span>);
+        }
+    }
+    req.xhr.open(method, url, <span class="hljs-literal">true</span>);
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> n <span class="hljs-keyword">in</span> req.header) {
+        <span class="hljs-comment">// &#x8BBE;&#x7F6E;req&#x7684;header</span>
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">Object</span>.prototype.hasOwnProperty.call(req.header, n)) {
+            req.xhr.setRequestHeader(n, req.header[n]);
+        }
+    }
+
+    <span class="hljs-keyword">if</span> (options.onprogress) {
+        <span class="hljs-comment">// &#x5982;&#x679C;&#x6709;&#x4E0A;&#x4F20;&#x8FDB;&#x5EA6;&#x56DE;&#x5230;&#xFF0C;&#x9644;&#x52A0;&#x65B9;&#x6CD5;</span>
+        <span class="hljs-comment">// &#x6B64;&#x65B9;&#x6CD5;&#x5728;&#x4F4E;&#x7AEF;&#x6D4F;&#x89C8;&#x5668;&#x4E0A;&#x65E0;&#x5B9E;&#x73B0;&#xFF0C;&#x4E3A;&#x4E86;&#x4E0D;&#x5F71;&#x54CD;&#x4E3B;&#x6D41;&#x7A0B;&#xFF0C;&#x4F7F;&#x7528;try</span>
+        <span class="hljs-keyword">try</span> {
+            req.xhr.upload.onprogress = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">event</span>) </span>{
+                options.onprogress(event, req);
+            };
+        } <span class="hljs-keyword">catch</span> (e) {}
+    }
+
+    <span class="hljs-comment">// &#x8FD4;&#x56DE;&#x6570;&#x636E;&#x96C6;&#x5408;</span>
+    <span class="hljs-keyword">var</span> res = {
+        _req: req,
+        xhr: req.xhr
+    };
+
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_onload</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">var</span> xhr = req.xhr;
+        <span class="hljs-keyword">if</span> (!res.isTimeout &amp;&amp; !xhr &amp;&amp; xhr.readyState != <span class="hljs-number">4</span>) {
+            <span class="hljs-comment">// readyState &#x975E;4&#xFF0C;&#x8FD4;&#x56DE;</span>
+            <span class="hljs-keyword">return</span>;
+        }
+
+        <span class="hljs-comment">// &#x8868;&#x793A;&#x5DF2;&#x7ECF;&#x5B8C;&#x6210;&#xFF0C;&#x5E76;&#x83B7;&#x53D6;&#x5230;&#x7ED3;&#x679C;</span>
+        res.isEnd = <span class="hljs-literal">true</span>;
+
+        <span class="hljs-keyword">var</span> headers = <span class="hljs-string">&quot;&quot;</span>;
+        <span class="hljs-keyword">try</span> {
+            <span class="hljs-comment">// &#x83B7;&#x53D6;&#x6240;&#x6709;&#x53EF;&#x4EE5;&#x7684;&#x7684;header&#x503C;&#xFF08;&#x5B57;&#x7B26;&#x4E32;&#xFF09;</span>
+            headers = xhr.getAllResponseHeaders();
+        } <span class="hljs-keyword">catch</span> (e) {}
+
+        <span class="hljs-comment">// &#x83B7;&#x53D6;&#x67D0;&#x4E2A;headers&#x4E2D;&#x7684;&#x503C;</span>
+        res.getHeader = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">key</span>) </span>{
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">RegExp</span>(<span class="hljs-string">&quot;(?:&quot;</span> + key + <span class="hljs-string">&quot;):[ \t]*([^\r\n]*)\r&quot;</span>).test(headers) ? <span class="hljs-built_in">RegExp</span>[<span class="hljs-string">&quot;$1&quot;</span>] : <span class="hljs-string">&quot;&quot;</span>;
+        };
+
+        res.text = <span class="hljs-string">&quot;&quot;</span>;
+        <span class="hljs-keyword">try</span> {
+            <span class="hljs-comment">// &#x8FD4;&#x56DE;&#x7684;&#x6587;&#x672C;&#x4FE1;&#x606F;</span>
+            res.text = xhr.responseText;
+        } <span class="hljs-keyword">catch</span> (e) {}
+        res.json = {};
+        <span class="hljs-keyword">try</span> {
+            <span class="hljs-comment">// &#x8FD4;&#x56DE;&#x7684;JSON&#x5BF9;&#x8C61;</span>
+            res.json = <span class="hljs-built_in">JSON</span>.parse(res.text);
+        } <span class="hljs-keyword">catch</span> (e) {}
+        <span class="hljs-comment">// &#x9ED8;&#x8BA4;&#x72B6;&#x6001;&#x503C;&#x4E3A; 0</span>
+        res.status = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">try</span> {
+            <span class="hljs-comment">// xhr status</span>
+            res.status = xhr.status;
+        } <span class="hljs-keyword">catch</span> (e) {}
+
+        <span class="hljs-keyword">var</span> s = res.status;
+        <span class="hljs-comment">// &#x8FD4;&#x56DE;&#x8FD9;&#x4E9B;&#x72B6;&#x6001;&#x503C;&#x8868;&#x793A;&#x6B63;&#x786E;</span>
+        res.isOk = (s &gt;= <span class="hljs-number">200</span> &amp;&amp; s &lt; <span class="hljs-number">300</span>) || s === <span class="hljs-number">304</span> || <span class="hljs-literal">false</span>;
+        <span class="hljs-keyword">if</span> (options.callback) {
+            <span class="hljs-comment">// &#x6267;&#x884C;&#x56DE;&#x8C03;&#x51FD;&#x6570;</span>
+            options.callback(res);
+        }
+        <span class="hljs-keyword">return</span> res;
+    }
+
+    <span class="hljs-comment">// &#x52A0;&#x5165;onload&#x4E8B;&#x4EF6;</span>
+    <span class="hljs-keyword">if</span> (<span class="hljs-string">&quot;onload&quot;</span> <span class="hljs-keyword">in</span> req.xhr) {
+        req.xhr.onload = _onload;
+    } <span class="hljs-keyword">else</span> {
+        req.xhr.onreadystatechange = _onload;
+    }
+
+    <span class="hljs-keyword">if</span> (req.timeout) {
+        <span class="hljs-comment">// &#x8D85;&#x65F6;&#x8BBE;&#x7F6E;</span>
+        setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-keyword">if</span> (res.isEnd) {
+                <span class="hljs-comment">// &#x5DF2;&#x7ECF;&#x5B8C;&#x6210;&#x6D41;&#x7A0B;&#xFF0C;&#x4E0D;&#x9700;&#x8981;&#x89E6;&#x53D1;&#x8D85;&#x65F6;</span>
+                <span class="hljs-keyword">return</span>;
+            }
+            res.isTimeout = <span class="hljs-literal">true</span>;
+            req.xhr.abort();
+        }, req.timeout);
+    }
+
+    req.xhr.send(bodyParam);
+}
+</code></pre>
 
                                 
                                 </section>
@@ -284,7 +533,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"AJAX中的数据处理","level":"1.2.2","depth":2,"next":{"title":"关于AJAX中的header","level":"1.2.3","depth":2,"path":"ajax/header.md","ref":"ajax/header.md","articles":[]},"previous":{"title":"简单的AJAX库","level":"1.2.1","depth":2,"path":"ajax/xmlhttp.md","ref":"ajax/xmlhttp.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"locus","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"fontsettings":{"theme":"white","family":"sans","size":2},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"locus - book","language":"zh-hans","links":{"sidebar":{"github":"https://github.com/szpoppy/"}},"gitbook":"3.2.3","description":"locus - book","theme-default":{"showLevel":true}},"file":{"path":"ajax/data.md","mtime":"2019-08-14T07:17:20.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-21T04:07:43.325Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"AJAX中的数据处理","level":"1.2.2","depth":2,"next":{"title":"关于AJAX中的header","level":"1.2.3","depth":2,"path":"ajax/header.md","ref":"ajax/header.md","articles":[]},"previous":{"title":"简单的AJAX库","level":"1.2.1","depth":2,"path":"ajax/xmlhttp.md","ref":"ajax/xmlhttp.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"locus","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"fontsettings":{"theme":"white","family":"sans","size":2},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"locus - book","language":"zh-hans","links":{"sidebar":{"github":"https://github.com/szpoppy/"}},"gitbook":"3.2.3","description":"locus - book","theme-default":{"showLevel":true}},"file":{"path":"ajax/data.md","mtime":"2019-08-22T03:55:12.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-22T03:57:24.735Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
