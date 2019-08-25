@@ -2,7 +2,7 @@
 
 具体 API 请查看 [官方文档](https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API/Using_Fetch)
 
-## fetch 和 XMLHttpRequest 常用功能对比
+## fetch 和 XMLHttpRequest 常用功能对比  
 
 | 内容        | fetch                                | XMLHttpRequest                    |
 | ----------- | ------------------------------------ | --------------------------------- |
