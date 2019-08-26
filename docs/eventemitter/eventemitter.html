@@ -1,0 +1,477 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>EventEmitter · locus - book</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="locus">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../ajax/" />
+    
+    
+    <link rel="prev" href="../" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="https://github.com/szpoppy/" target="_blank" class="custom-link">github</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    轨迹的博客
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2" data-path="eventemitter.html">
+            
+                <a href="eventemitter.html">
+            
+                    
+                    EventEmitter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../ajax/">
+            
+                <a href="../ajax/">
+            
+                    
+                    AJAX 是什么
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../ajax/xmlhttp.html">
+            
+                <a href="../ajax/xmlhttp.html">
+            
+                    
+                    简单的 AJAX 库
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../ajax/data.html">
+            
+                <a href="../ajax/data.html">
+            
+                    
+                    AJAX 中的数据处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../ajax/header.html">
+            
+                <a href="../ajax/header.html">
+            
+                    
+                    关于 AJAX 中的 header
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../ajax/fetch.html">
+            
+                <a href="../ajax/fetch.html">
+            
+                    
+                    Ajax - fetch
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../ajax/lib.html">
+            
+                <a href="../ajax/lib.html">
+            
+                    
+                    Ajax 库的实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >EventEmitter</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="eventemitter">EventEmitter</h1>
+<ul>
+<li><a href="http://nodejs.cn/api/events.html#events_class_eventemitter" target="_blank">nodejs &#x4E2D;&#x7684;&#x6587;&#x6863;&#x53C2;&#x8003;</a></li>
+<li>&#x4E0B;&#x9762;&#x9700;&#x8981;&#x5B9E;&#x73B0;&#x5728;&#x6D4F;&#x89C8;&#x5668;&#x4E2D;&#x7684;&#x7C7B;&#x4F3C;&#x529F;&#x80FD;&#xFF0C;&#x4E3B;&#x8981;&#x6709; emit on off once</li>
+<li>&#x589E;&#x52A0;&#x4E00;&#x4E2A; hasEvent &#x51FD;&#x6570;&#xFF0C;&#x6765;&#x5224;&#x65AD;&#x662F;&#x5426;&#x6709;&#x8FD9;&#x4E2A;&#x4E8B;&#x4EF6;&#x52A0;&#x5165;&#x4E86;</li>
+<li>&#x652F;&#x6301;&#x5BF9;&#x7C7B;&#x539F;&#x578B;&#x4E0A;&#x901A;&#x8FC7; on &#x6765;&#x589E;&#x52A0;&#x5168;&#x5C40; eventEmitter &#x4E8B;&#x4EF6;</li>
+<li>&#x672C;&#x5B9E;&#x4F8B;&#x4F1A;&#x5728; ajax &#x4E2D;&#xFF0C;&#x5B9E;&#x73B0;<a href="ajax/lib.md">ajax &#x5E93;</a>&#x4E2D;&#x4F1A;&#x4F7F;&#x7528;&#x5230;</li>
+</ul>
+<pre><code class="lang-javascript"><span class="hljs-comment">// &#x5168;&#x5C40;&#x4E8B;&#x4EF6;&#x6309;&#x7C7B;&#x6765;&#x5206;</span>
+<span class="hljs-keyword">let</span> monitorAll = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Map</span>();
+<span class="hljs-comment">// ES6 &#x5B9E;&#x73B0; EventEmitter &#x7684;&#x65B9;&#x5F0F;</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">EventEmitter</span> </span>{
+    <span class="hljs-keyword">constructor</span>() {
+        <span class="hljs-keyword">let</span> monitor = <span class="hljs-keyword">this</span>._monitor_;
+        <span class="hljs-comment">// &#x4E8B;&#x4EF6;&#x5B58;&#x653E;&#x53D8;&#x91CF;</span>
+        <span class="hljs-keyword">this</span>._monitor_ = {};
+        <span class="hljs-keyword">if</span> (monitor) {
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> n <span class="hljs-keyword">in</span> monitor) {
+                <span class="hljs-keyword">if</span> (<span class="hljs-built_in">Object</span>.prototype.hasOwnProperty.call(monitor, n)) {
+                    (<span class="hljs-keyword">this</span>._monitor_[n] = []).push(...monitor[n]);
+                }
+            }
+        }
+    }
+    <span class="hljs-comment">/**
+     * &#x7ED1;&#x5B9A;&#x4E8B;&#x4EF6;
+     * @param type &#x4E8B;&#x4EF6;&#x540D;&#x79F0;
+     * @param fun &#x4E8B;&#x4EF6;&#x65B9;&#x6CD5;
+     * @returns {EventEmitter}
+     */</span>
+    on(type, fun) {
+        <span class="hljs-keyword">let</span> monitor = <span class="hljs-keyword">this</span>._monitor_ || (<span class="hljs-keyword">this</span>._monitor_ = {});
+        monitor[type] || (monitor[type] = []);
+        monitor[type].push(fun);
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+    }
+
+    <span class="hljs-comment">/**
+     * &#x5224;&#x65AD;&#x662F;&#x5426;&#x8FD8;&#x6709;&#x7279;&#x5B9A;&#x4E8B;&#x4EF6;
+     * @param type
+     * @returns {Boolean}
+     */</span>
+    hasEvent(type) {
+        <span class="hljs-keyword">let</span> monitor = (<span class="hljs-keyword">this</span>._monitor_ &amp;&amp; <span class="hljs-keyword">this</span>._monitor_[type]) || [];
+        <span class="hljs-keyword">return</span> monitor.length &gt; <span class="hljs-number">0</span>;
+    }
+
+    <span class="hljs-comment">/**
+     * &#x53EA;&#x6709;&#x6267;&#x884C;&#x4E00;&#x6B21;&#x7684;&#x4E8B;&#x4EF6;
+     * @param type &#x4E8B;&#x4EF6;&#x540D;&#x79F0;
+     * @param fun &#x4E8B;&#x4EF6;&#x65B9;&#x6CD5;
+     * @returns {EventEmitter}
+     */</span>
+    once(type, fun) {
+        <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">funOnce</span>(<span class="hljs-params"></span>) </span>{
+            fun.apply(<span class="hljs-keyword">this</span>, <span class="hljs-built_in">arguments</span>);
+            <span class="hljs-keyword">this</span>.off(type, funOnce);
+        }
+        <span class="hljs-keyword">this</span>.on(type, funOnce);
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+    }
+
+    <span class="hljs-comment">/**
+     * &#x79FB;&#x9664;&#x4E8B;&#x4EF6;
+     * @param type &#x4E8B;&#x4EF6;&#x540D;&#x79F0;
+     * @param fun &#x4E8B;&#x4EF6;&#x65B9;&#x6CD5;
+     * @returns {EventEmitter}
+     */</span>
+    off(type, fun) {
+        <span class="hljs-keyword">let</span> monitor = <span class="hljs-keyword">this</span>._monitor_;
+        <span class="hljs-keyword">if</span> (monitor) {
+            <span class="hljs-keyword">if</span> (fun) {
+                <span class="hljs-keyword">let</span> es = monitor[type];
+                <span class="hljs-keyword">if</span> (es) {
+                    <span class="hljs-keyword">let</span> index = es.indexOf(fun);
+                    <span class="hljs-keyword">if</span> (index &gt; <span class="hljs-number">-1</span>) {
+                        es.splice(index, <span class="hljs-number">1</span>);
+                    }
+                    <span class="hljs-keyword">if</span> (es.length == <span class="hljs-number">0</span>) {
+                        <span class="hljs-keyword">delete</span> monitor[type];
+                    }
+                }
+            } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (type) {
+                <span class="hljs-keyword">delete</span> monitor[type];
+            } <span class="hljs-keyword">else</span> {
+                <span class="hljs-keyword">delete</span> <span class="hljs-keyword">this</span>._monitor_;
+            }
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+    }
+
+    <span class="hljs-comment">/**
+     * &#x89E6;&#x53D1;&#x4E8B;&#x4EF6;
+     * @param {String} type &#x4E8B;&#x4EF6;&#x540D;&#x79F0;
+     * @param {*} ag &#x4F20;&#x9012;&#x7684;&#x53C2;&#x6570;
+     */</span>
+    emit(type, ...ag) {
+        <span class="hljs-keyword">let</span> es = (<span class="hljs-keyword">this</span>._monitor_ &amp;&amp; <span class="hljs-keyword">this</span>._monitor_[type]) || [];
+        <span class="hljs-keyword">if</span> (es.length) {
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; es.length; i += <span class="hljs-number">1</span>) {
+                es[i].apply(<span class="hljs-keyword">this</span>, ag);
+            }
+        }
+        <span class="hljs-keyword">return</span> ag;
+    }
+
+    _monitor_: {};
+}
+
+<span class="hljs-built_in">Object</span>.defineProperty(EventEmitter.prototype, <span class="hljs-string">&quot;_monitor_&quot;</span>, {
+    get() {
+        <span class="hljs-comment">// &#x6309;&#x7167;&#x7C7B;&#x540D;&#x8FD4;&#x56DE;&#x771F;&#x5B9E;&#x7684;&#x5168;&#x5C40;&#x4E8B;&#x4EF6;</span>
+        <span class="hljs-keyword">return</span> monitorAll.get(<span class="hljs-keyword">this</span>.constructor);
+    },
+    set(value) {
+        <span class="hljs-comment">// &#x6309;&#x7167;&#x7C7B;&#x540D;&#x6765;&#x8BBE;&#x7F6E;&#x5168;&#x5C40;&#x7C7B;&#x7684;&#x5168;&#x5C40;&#x4E8B;&#x4EF6;</span>
+        monitorAll.set(<span class="hljs-keyword">this</span>.constructor, value);
+    }
+});
+</code></pre>
+<h2 id="eventemitter-&#x7684;&#x4F7F;&#x7528;">EventEmitter &#x7684;&#x4F7F;&#x7528;</h2>
+<pre><code class="lang-javascript"><span class="hljs-comment">// &#x57FA;&#x672C;&#x7528;&#x6CD5;</span>
+<span class="hljs-keyword">let</span> em1 = <span class="hljs-keyword">new</span> EventEmitter();
+em1.on(<span class="hljs-string">&quot;event1&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">data</span>)</span>{})
+em1.emit(<span class="hljs-string">&quot;event1&quot;</span>, <span class="hljs-string">&quot;data1&quot;</span>)
+
+<span class="hljs-comment">// &#x5168;&#x5C40;&#x8BBE;&#x7F6E;</span>
+EventEmitter.prototype.on(<span class="hljs-string">&quot;global1&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{})
+
+<span class="hljs-comment">// &#x8FD9;&#x65F6;&#x5019;&#xFF0C;em2&#x4E2D;&#xFF0C;&#x5C31;&#x5305;&#x542B;&#x4E86;global1&#x8FD9;&#x4E2A;&#x4E8B;&#x4EF6;</span>
+<span class="hljs-keyword">let</span> em2 = <span class="hljs-keyword">new</span> EventEmitter();
+
+<span class="hljs-comment">// EventEmitter&#x652F;&#x6301;&#x88AB;&#x7EE7;&#x627F;&#xFF0C;&#x7EE7;&#x627F;&#x540E;&#xFF0C;&#x65B0;&#x7684;&#x7C7B;&#x4E0A;&#x8BBE;&#x7F6E;&#x7684;&#x5168;&#x5C40;&#x4E8B;&#x4EF6;&#x548C;EventEmitter&#x4E0A;&#x7684;&#x5168;&#x5C40;&#x4E8B;&#x4EF6;&#x8BBE;&#x7F6E;&#x4E0D;&#x51B2;&#x7A81;</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SubEvent</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">EventEmitter</span> </span>{
+    <span class="hljs-keyword">constructor</span>() {
+        <span class="hljs-keyword">super</span>()
+    }
+}
+SubEvent.prototype.on(<span class="hljs-string">&quot;global2&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{})
+<span class="hljs-comment">// &#x8FD9;&#x65F6;&#x5019;&#xFF0C;se2&#x4E2D;&#xFF0C;&#x5C31;&#x5305;&#x542B;&#x4E86;global2&#x8FD9;&#x4E2A;&#x4E8B;&#x4EF6;</span>
+<span class="hljs-keyword">let</span> se2 = <span class="hljs-keyword">new</span> SubEvent();
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../" class="navigation navigation-prev " aria-label="Previous page: 轨迹的博客">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../ajax/" class="navigation navigation-next " aria-label="Next page: AJAX 是什么">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"EventEmitter","level":"1.2","depth":1,"next":{"title":"AJAX 是什么","level":"1.3","depth":1,"path":"ajax/index.md","ref":"ajax/index.md","articles":[{"title":"简单的 AJAX 库","level":"1.3.1","depth":2,"path":"ajax/xmlhttp.md","ref":"ajax/xmlhttp.md","articles":[]},{"title":"AJAX 中的数据处理","level":"1.3.2","depth":2,"path":"ajax/data.md","ref":"ajax/data.md","articles":[]},{"title":"关于 AJAX 中的 header","level":"1.3.3","depth":2,"path":"ajax/header.md","ref":"ajax/header.md","articles":[]},{"title":"Ajax - fetch","level":"1.3.4","depth":2,"path":"ajax/fetch.md","ref":"ajax/fetch.md","articles":[]},{"title":"Ajax 库的实现","level":"1.3.5","depth":2,"path":"ajax/lib.md","ref":"ajax/lib.md","articles":[]}]},"previous":{"title":"轨迹的博客","level":"1.1","depth":1,"path":"index.md","ref":"index.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"locus","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"fontsettings":{"theme":"white","family":"sans","size":2},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"locus - book","language":"zh-hans","links":{"sidebar":{"github":"https://github.com/szpoppy/"}},"gitbook":"3.2.3","description":"locus - book","theme-default":{"showLevel":true}},"file":{"path":"eventemitter/eventemitter.md","mtime":"2019-08-26T09:33:48.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-26T09:34:04.780Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
