@@ -104,8 +104,6 @@ export default class EventEmitter {
         }
         return ag;
     }
-
-    _monitor_: {};
 }
 
 Object.defineProperty(EventEmitter.prototype, "_monitor_", {
