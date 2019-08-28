@@ -24,6 +24,13 @@ let host = window.location.host;
 // 是否原声支持 fetch
 let hasFetch = !!window.fetch;
 
+/**
+ * 数据循环
+ * @param {Array、Object} arr 循环的数据
+ * @param {Function} fun 每次循环执行函数
+ * @param {Array} exe fun return后推入次数组
+ * @param {*} scope fun this指向
+ */
 let forEach = (function() {
     function forpush(arr, v) {
         arr.push(v);
@@ -40,13 +47,7 @@ let forEach = (function() {
 
     const types = "-[object array]-[object nodelist]-[object htmlcollection]-[object arguments]-";
 
-    /**
-     * 数据循环
-     * @param {Array、Object} arr 循环的数据
-     * @param {Function} fun 每次循环执行函数
-     * @param {Array} exe fun return后推入次数组
-     * @param {*} scope fun this指向
-     */
+    
     return function(arr, fun, exe, scope) {
         scope || (scope = this);
         if (arr) {
@@ -582,8 +583,7 @@ function requestSend(param, req) {
  * @param method
  * @param async
  */
- // export default
-class Ajax extends EventEmitter {
+export default class Ajax extends EventEmitter {
     // 初始化
     constructor({ url = "", method = "GET", dataType, resType, async = true, param = {}, header = {}, jsonpKey } = {}) {
         super();
