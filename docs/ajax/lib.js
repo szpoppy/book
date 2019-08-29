@@ -1,19 +1,3 @@
-# ajax 库的实现（整合 xhr fetch jsonp）
-
-## 先来个流程图
-
-![avatar](./imgs/ajax-1.png)
-
--   左侧为请求体（Request）
--   右侧为响应体（Response）
--   Event 代表事件相应
--   open 事件可以认为是 axios 中的 request 拦截器
--   verify 事件可以认为是 axios 中的 response 拦截器
--   其他的具体细节可以看代码实现,代码只做过简单的测试
-
-[源码](./lib.js)
-
-```javascript
 (function(global, factory) {
     // UMD 加载方案
     if (typeof exports === "object" && typeof module !== "undefined") {
@@ -888,4 +872,3 @@
 
     return Ajax;
 });
-```

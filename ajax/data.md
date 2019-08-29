@@ -55,7 +55,7 @@ var querystring = {
     stringify: function(json, opt) {
         var sep = opt && opt.sep || '&'
         var eq = opt && opt.eq || '='
-        var unescape = opt && opt.unescape || window.decodeURIComponent
+        var escape = opt && opt.escape || window.encodeURIComponent
 
         let arr = []
         for(let n in json){
