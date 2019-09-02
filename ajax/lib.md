@@ -36,16 +36,25 @@
         // ES6 实现 EventEmitter 的方式
         class EventEmitter {
             constructor() {
-                let monitor = this._monitor_;
-                // 事件存放变量
-                this._monitor_ = {};
-                if (monitor) {
-                    for (let n in monitor) {
-                        if (Object.prototype.hasOwnProperty.call(monitor, n)) {
-                            (this._monitor_[n] = []).push(...monitor[n]);
+                let monitor = {};
+                if (this._monitor_) {
+                    for (let n in this._monitor_) {
+                        if (Object.prototype.hasOwnProperty.call(this._monitor_, n)) {
+                            (monitor[n] = []).push(...this._monitor_[n]);
                         }
                     }
                 }
+
+                Object.defineProperty(this, "_monitor_", {
+                    get() {
+                        // 按照类名返回真实的全局事件
+                        return monitor;
+                    },
+                    set(value) {
+                        // 按照类名来设置全局类的全局事件
+                        monitor = value;
+                    }
+                });
             }
             /**
              * 绑定事件

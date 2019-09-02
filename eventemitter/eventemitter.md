@@ -12,16 +12,25 @@ let monitorAll = new Map();
 // ES6 实现 EventEmitter 的方式
 export default class EventEmitter {
     constructor() {
-        let monitor = this._monitor_;
-        // 事件存放变量
-        this._monitor_ = {};
-        if (monitor) {
-            for (let n in monitor) {
-                if (Object.prototype.hasOwnProperty.call(monitor, n)) {
-                    (this._monitor_[n] = []).push(...monitor[n]);
+        let monitor = {};
+        if (this._monitor_) {
+            for (let n in this._monitor_) {
+                if (Object.prototype.hasOwnProperty.call(this._monitor_, n)) {
+                    (monitor[n] = []).push(...this._monitor_[n]);
                 }
             }
         }
+
+        Object.defineProperty(this, "_monitor_", {
+            get() {
+                // 按照类名返回真实的全局事件
+                return monitor;
+            },
+            set(value) {
+                // 按照类名来设置全局类的全局事件
+                monitor = value;
+            }
+        });
     }
     /**
      * 绑定事件
@@ -119,14 +128,15 @@ Object.defineProperty(EventEmitter.prototype, "_monitor_", {
 ```
 
 ## EventEmitter 的使用
-````javascript
+
+```javascript
 // 基本用法
 let em1 = new EventEmitter();
-em1.on("event1", function(data){})
-em1.emit("event1", "data1")
+em1.on("event1", function(data) {});
+em1.emit("event1", "data1");
 
 // 全局设置
-EventEmitter.prototype.on("global1", function(){})
+EventEmitter.prototype.on("global1", function() {});
 
 // 这时候，em2中，就包含了global1这个事件
 let em2 = new EventEmitter();
@@ -134,11 +144,10 @@ let em2 = new EventEmitter();
 // EventEmitter支持被继承，继承后，新的类上设置的全局事件和EventEmitter上的全局事件设置不冲突
 class SubEvent extends EventEmitter {
     constructor() {
-        super()
+        super();
     }
 }
-SubEvent.prototype.on("global2", function(){})
+SubEvent.prototype.on("global2", function() {});
 // 这时候，se2中，就包含了global2这个事件
 let se2 = new SubEvent();
-
-````
+```
