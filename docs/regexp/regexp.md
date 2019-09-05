@@ -124,20 +124,41 @@ function toUpperCaseByCssKey(str) {
     });
 }
 
-toUpperCaseByCssKey("margin-left")  // marginLeft
-toUpperCaseByCssKey("border-left-color") // borderLeftColor
+toUpperCaseByCssKey("margin-left"); // marginLeft
+toUpperCaseByCssKey("border-left-color"); // borderLeftColor
 ```
 
+## 匹配 HTML 中所有带有 src 字段的 script 标签
 
-## 匹配HTML中所有带有src字段的script标签
 ```javascript
-/<script[^>]+?src=(["'])(^\1+)\1[^>]*?>[\s\S]*?<\/script>/g
+/<script[^>]+?src=(["'])(^\1+)\1[^>]*?>[\s\S]*?<\/script>/g;
 ```
 
-- \[^>\]+? 非 > 至少有一个字符，并最少匹配 ? 代表最少匹配
-- \1 代表 (["'])括号中匹配的引号
-- \[^>\]*? 同第一条类似，匹配0个或者多个
-- \[\s\S\]*? 最少匹配全部字符  同 .号区别是，.号无法匹配回车符
-- 以上正则可以通过 replace 或者 exec 等操作函数操作
+-   \[^>\]+? 非 > 至少有一个字符，并最少匹配 ? 代表最少匹配
+-   \1 代表 (["'])括号中匹配的引号
+-   \[^>\]\*? 同第一条类似，匹配 0 个或者多个
+-   \[\s\S\]\*? 最少匹配全部字符 同 .号区别是，.号无法匹配回车符
+-   以上正则可以通过 replace 或者 exec 等操作函数操作
 
-##  后续待续
+## 关于(?:) (?=) (?!)
+
+-   三个都不记录分组
+-   (?=) =号后面需要紧跟的目标字符串，但括号中不进行存储供以后使用
+-   (?!) =号后面需要紧跟的非目标字符串，但括号中不进行存储供以后使用
+
+```javascript
+/aaa(ab|xy)bb/.test("aaaabbb")      // 输出为 true
+RegExp.$1                           // 输出为 ab
+/aaa(?:ab|xy)bb/.test("aaaabbb")    // 输出为true
+RegExp.$1                           // 输出为 空
+/aaa(ab|xy)bb/.test("aaaxybb")      // 输出为 true
+RegExp.$1                           // 输出为 xy
+/aaa(?:ab|xy)bb/.test("aaaxybb")    // 输出为true
+RegExp.$1                           // 输出为 空
+
+// 整个进行存储匹配，所以是两个字母
+"aaaaaaab".match(/(\w)(?:\1)/g)     // ["aa", "aa", "aa"]
+// 只匹配第一个括号，第二个只作为验证不作为匹配
+"aaaaaaab".match(/(\w)(?=\1)/g)     // ["a", "a", "a", "a", "a", "a"]
+"aaaaaaab".match(/(\w)(?!\1)/g)     // ["a", "b"]
+```
