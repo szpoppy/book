@@ -54,6 +54,7 @@ EventBus.dispatch("method1")
 - 全局监控支持（当监控到某个组件初始化后，会自动触发回调）。
 
 > Vue插件注册  
+
 ````javascript
 import Vue from 'vue'
 import VueUnicom from 'vue-unicom'
@@ -73,6 +74,7 @@ Vue.use(VueUnicom, {
 ````
 
 > Vue组件内部使用  
+
 ````javascript
 {
     // 将这个组件归到group分组， 多个分组请使用字符串数组
@@ -104,7 +106,8 @@ Vue.use(VueUnicom, {
 }
 ````
 
-> Vue组件实例化传参
+> Vue组件实例化传参  
+
 ````html
 <!-- 加入group分组 并且 将本组件命名为 id -->
 <component unicom-name="group" unicom-id="id"></component>

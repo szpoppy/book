@@ -344,6 +344,7 @@ EventBus.dispatch(<span class="hljs-string">&quot;method1&quot;</span>)
 </ul>
 <blockquote>
 <p>Vue&#x63D2;&#x4EF6;&#x6CE8;&#x518C;  </p>
+</blockquote>
 <pre><code class="lang-javascript"><span class="hljs-keyword">import</span> Vue <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;vue&apos;</span>
 <span class="hljs-keyword">import</span> VueUnicom <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;vue-unicom&apos;</span>
 <span class="hljs-comment">// &#x975E; cli &#x4E5F;&#x5FC5;&#x987B; install&#x4E00;&#x4E0B;</span>
@@ -360,43 +361,47 @@ Vue.use(VueUnicom, {
     unicomClass: <span class="hljs-string">&apos;Unicom&apos;</span>
 })
 </code></pre>
-<p>Vue&#x7EC4;&#x4EF6;&#x5185;&#x90E8;&#x4F7F;&#x7528;<br>````javascript
-{
-    // &#x5C06;&#x8FD9;&#x4E2A;&#x7EC4;&#x4EF6;&#x5F52;&#x5230;group&#x5206;&#x7EC4;&#xFF0C; &#x591A;&#x4E2A;&#x5206;&#x7EC4;&#x8BF7;&#x4F7F;&#x7528;&#x5B57;&#x7B26;&#x4E32;&#x6570;&#x7EC4;
-    unicomName: &apos;group&apos;,
-    // unicom &#x662F;&#x7EC4;&#x4EF6;&#x5185;&#x90E8;&#x8BA2;&#x9605;&#x6D88;&#x606F;&#x8BBE;&#x7F6E;&#x7684;
+<blockquote>
+<p>Vue&#x7EC4;&#x4EF6;&#x5185;&#x90E8;&#x4F7F;&#x7528;  </p>
+</blockquote>
+<pre><code class="lang-javascript">{
+    <span class="hljs-comment">// &#x5C06;&#x8FD9;&#x4E2A;&#x7EC4;&#x4EF6;&#x5F52;&#x5230;group&#x5206;&#x7EC4;&#xFF0C; &#x591A;&#x4E2A;&#x5206;&#x7EC4;&#x8BF7;&#x4F7F;&#x7528;&#x5B57;&#x7B26;&#x4E32;&#x6570;&#x7EC4;</span>
+    unicomName: <span class="hljs-string">&apos;group&apos;</span>,
+    <span class="hljs-comment">// unicom &#x662F;&#x7EC4;&#x4EF6;&#x5185;&#x90E8;&#x8BA2;&#x9605;&#x6D88;&#x606F;&#x8BBE;&#x7F6E;&#x7684;</span>
     unicom: {
-        // &#x8BA2;&#x9605;&#x6D88;&#x606F; &#x4E3A; instruct
+        <span class="hljs-comment">// &#x8BA2;&#x9605;&#x6D88;&#x606F; &#x4E3A; instruct</span>
         instruct (event) {
-            // event &#x53C2;&#x6570;&#x53C2;&#x7167;&#x4E0A;&#x9762;&#x300A;JS&#x4E2D;&#x4F7F;&#x7528;&#x300B;&#x4E2D;&#x7684;on&#x65B9;&#x6CD5;&#x56DE;&#x8C03;&#x53C2;&#x6570;
+            <span class="hljs-comment">// event &#x53C2;&#x6570;&#x53C2;&#x7167;&#x4E0A;&#x9762;&#x300A;JS&#x4E2D;&#x4F7F;&#x7528;&#x300B;&#x4E2D;&#x7684;on&#x65B9;&#x6CD5;&#x56DE;&#x8C03;&#x53C2;&#x6570;</span>
         }
     },
     method: {
         doExec () {
-            // &#x53D1;&#x5E03;&#x8BA2;&#x9605;&#x6D88;&#x606F;
-            // instruct &#x672C;&#x7EC4;&#x4EF6;&#x5982;&#x679C;&#x8BA2;&#x9605;&#xFF0C;&#x4E5F;&#x80FD;&#x6536;&#x5230;
-            this.$unicom(&quot;instruct&quot;, arg1, arg2, ...)</p>
-</blockquote>
-<pre><code>        // &#x83B7;&#x53D6;&#x88AB;&#x547D;&#x540D;&#x4E3A; id&#x7684;&#x7EC4;&#x4EF6;&#x5F15;&#x7528;
-        // that &#x4E3A;unicom&#x5B9E;&#x4F8B;&#xFF0C;that.target &#x4E3A;Vue&#x7684;&#x5B9E;&#x4F8B;
-        let that = this.$unicom(&quot;#id&quot;)
+            <span class="hljs-comment">// &#x53D1;&#x5E03;&#x8BA2;&#x9605;&#x6D88;&#x606F;</span>
+            <span class="hljs-comment">// instruct &#x672C;&#x7EC4;&#x4EF6;&#x5982;&#x679C;&#x8BA2;&#x9605;&#xFF0C;&#x4E5F;&#x80FD;&#x6536;&#x5230;</span>
+            <span class="hljs-keyword">this</span>.$unicom(<span class="hljs-string">&quot;instruct&quot;</span>, arg1, arg2, ...)
 
-        // &#x83B7;&#x53D6;&#x5206;&#x7EC4;&#x4E3A; group &#x7684;&#x6240;&#x6709;vue
-        let thats = this.$unicom(&quot;@group&quot;)
+            <span class="hljs-comment">// &#x83B7;&#x53D6;&#x88AB;&#x547D;&#x540D;&#x4E3A; id&#x7684;&#x7EC4;&#x4EF6;&#x5F15;&#x7528;</span>
+            <span class="hljs-comment">// that &#x4E3A;unicom&#x5B9E;&#x4F8B;&#xFF0C;that.target &#x4E3A;Vue&#x7684;&#x5B9E;&#x4F8B;</span>
+            <span class="hljs-keyword">let</span> that = <span class="hljs-keyword">this</span>.$unicom(<span class="hljs-string">&quot;#id&quot;</span>)
 
-        // &#x539F;&#x59CB; unicom &#x5BF9;&#x8C61;&#x7684;&#x6307;&#x5411;&#xFF0C;&#x4E0D;&#x4ECB;&#x610F;&#x76F4;&#x63A5;&#x64CD;&#x4F5C;
-        this._unicom_data_.self
+            <span class="hljs-comment">// &#x83B7;&#x53D6;&#x5206;&#x7EC4;&#x4E3A; group &#x7684;&#x6240;&#x6709;vue</span>
+            <span class="hljs-keyword">let</span> thats = <span class="hljs-keyword">this</span>.$unicom(<span class="hljs-string">&quot;@group&quot;</span>)
+
+            <span class="hljs-comment">// &#x539F;&#x59CB; unicom &#x5BF9;&#x8C61;&#x7684;&#x6307;&#x5411;&#xFF0C;&#x4E0D;&#x4ECB;&#x610F;&#x76F4;&#x63A5;&#x64CD;&#x4F5C;</span>
+            <span class="hljs-keyword">this</span>._unicom_data_.self
+        }
     }
 }
-</code></pre><p>}</p>
-<pre><code>
-&gt; Vue&#x7EC4;&#x4EF6;&#x5B9E;&#x4F8B;&#x5316;&#x4F20;&#x53C2;
-````html
-&lt;!-- &#x52A0;&#x5165;group&#x5206;&#x7EC4; &#x5E76;&#x4E14; &#x5C06;&#x672C;&#x7EC4;&#x4EF6;&#x547D;&#x540D;&#x4E3A; id --&gt;
-&lt;component unicom-name=&quot;group&quot; unicom-id=&quot;id&quot;&gt;&lt;/component&gt;
-&lt;!-- &#x52A0;&#x5165;&#x591A;&#x4E2A;&#x5206;&#x7EC4;&#xFF0C;&#x8BF7;&#x4F20;&#x5165;&#x6570;&#x7EC4; --&gt;
-&lt;component :unicom-name=&quot;[&apos;group1&apos;, &apos;group2&apos;]&quot;&gt;&lt;/component&gt;
 </code></pre>
+<blockquote>
+<p>Vue&#x7EC4;&#x4EF6;&#x5B9E;&#x4F8B;&#x5316;&#x4F20;&#x53C2;  </p>
+</blockquote>
+<pre><code class="lang-html"><span class="hljs-comment">&lt;!-- &#x52A0;&#x5165;group&#x5206;&#x7EC4; &#x5E76;&#x4E14; &#x5C06;&#x672C;&#x7EC4;&#x4EF6;&#x547D;&#x540D;&#x4E3A; id --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">component</span> <span class="hljs-attr">unicom-name</span>=<span class="hljs-string">&quot;group&quot;</span> <span class="hljs-attr">unicom-id</span>=<span class="hljs-string">&quot;id&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">component</span>&gt;</span>
+<span class="hljs-comment">&lt;!-- &#x52A0;&#x5165;&#x591A;&#x4E2A;&#x5206;&#x7EC4;&#xFF0C;&#x8BF7;&#x4F20;&#x5165;&#x6570;&#x7EC4; --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">component</span> <span class="hljs-attr">:unicom-name</span>=<span class="hljs-string">&quot;[&apos;group1&apos;, &apos;group2&apos;]&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">component</span>&gt;</span>
+</code></pre>
+
                                 
                                 </section>
                             
@@ -439,7 +444,7 @@ Vue.use(VueUnicom, {
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Vue","level":"1.5","depth":1,"next":{"title":"组件通讯","level":"1.5.1","depth":2,"path":"vue/broad-1.md","ref":"vue/broad-1.md","articles":[]},"previous":{"title":"正则表达式的使用","level":"1.4","depth":1,"path":"regexp/regexp.md","ref":"regexp/regexp.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"locus","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"fontsettings":{"theme":"white","family":"sans","size":2},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"locus - book","language":"zh-hans","links":{"sidebar":{"github":"https://github.com/szpoppy/"}},"gitbook":"3.2.3","description":"locus - book","theme-default":{"showLevel":true}},"file":{"path":"vue/broad-1.md","mtime":"2019-09-10T03:09:07.738Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-09-10T03:12:04.032Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Vue","level":"1.5","depth":1,"next":{"title":"组件通讯","level":"1.5.1","depth":2,"path":"vue/broad-1.md","ref":"vue/broad-1.md","articles":[]},"previous":{"title":"正则表达式的使用","level":"1.4","depth":1,"path":"regexp/regexp.md","ref":"regexp/regexp.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"locus","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"fontsettings":{"theme":"white","family":"sans","size":2},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"locus - book","language":"zh-hans","links":{"sidebar":{"github":"https://github.com/szpoppy/"}},"gitbook":"3.2.3","description":"locus - book","theme-default":{"showLevel":true}},"file":{"path":"vue/broad-1.md","mtime":"2019-09-10T03:38:23.685Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-09-10T03:38:51.770Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
