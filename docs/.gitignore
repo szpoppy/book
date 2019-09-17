@@ -8,3 +8,5 @@
 *.ntvs*
 *.njsproj
 *.sln
+*._
+
