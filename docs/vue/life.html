@@ -310,26 +310,26 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="vue-life">vue-life</h1>
-<h2 id="vue-&#x81EA;&#x5B9A;&#x4E49;&#x751F;&#x547D;&#x5468;&#x671F;">Vue &#x81EA;&#x5B9A;&#x4E49;&#x751F;&#x547D;&#x5468;&#x671F;</h2>
+<h2 id="vue&#x81EA;&#x5B9A;&#x4E49;&#x751F;&#x547D;&#x5468;&#x671F;">Vue&#x81EA;&#x5B9A;&#x4E49;&#x751F;&#x547D;&#x5468;&#x671F;</h2>
 <ul>
-<li>&#x6240;&#x6709;&#x81EA;&#x5B9A;&#x4E49;&#x751F;&#x547D;&#x5468;&#x671F;&#xFF0C;&#x90FD;&#x7ED1;&#x5B9A; Vue &#x7684;&#x5B9E;&#x9645;&#x751F;&#x547D;&#x5468;&#x671F;&#x51FD;&#x6570;&#xFF0C;&#x5E76;&#x786E;&#x4FDD;&#x5728;&#x5B9E;&#x9645;&#x751F;&#x547D;&#x5468;&#x671F;&#x4E4B;&#x540E;&#x6267;&#x884C;</li>
+<li>&#x6240;&#x6709;&#x81EA;&#x5B9A;&#x4E49;&#x751F;&#x547D;&#x5468;&#x671F;&#xFF0C;&#x90FD;&#x7ED1;&#x5B9A;Vue&#x7684;&#x5B9E;&#x9645;&#x751F;&#x547D;&#x5468;&#x671F;&#x51FD;&#x6570;&#xFF0C;&#x5E76;&#x786E;&#x4FDD;&#x5728;&#x5B9E;&#x9645;&#x751F;&#x547D;&#x5468;&#x671F;&#x4E4B;&#x540E;&#x6267;&#x884C;</li>
 <li>&#x81EA;&#x5B9A;&#x4E49;&#x751F;&#x547D;&#x5468;&#x671F;&#x51FD;&#x6570;&#x7684;&#x8FD0;&#x884C;&#x53D7;&#x9650;&#x4E8E;&#x672C;&#x8EAB;&#x9879;&#x76EE;&#x4E2D;&#x7684;&#x7279;&#x5B9A;&#x6D41;&#x7A0B;&#x3002;</li>
 <li>&#x4E0B;&#x9762;&#x5B9E;&#x4F8B;</li>
 </ul>
 <h2 id="&#x793A;&#x4F8B;">&#x793A;&#x4F8B;</h2>
 <pre><code class="lang-javascript"><span class="hljs-comment">// &#x521D;&#x59CB;&#x5316; &#x94A9;&#x5B50;&#x51FD;&#x6570; ready</span>
-<span class="hljs-keyword">import</span> VueLife <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;vue-life&quot;</span>;
+<span class="hljs-keyword">import</span> VueLife <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;vue-life&quot;</span>
 Vue.use(VueLife, {
     <span class="hljs-comment">// &#x5B8C;&#x6210;&#x56DE;&#x8C03;</span>
-    init(emit) {
+    init ({emit, vue}, ...args) {
         <span class="hljs-comment">// &#x8FD0;&#x884C;&#x83B7;&#x53D6;&#x5B8C;&#x6210;&#x8EAB;&#x4EFD;&#x89E6;&#x53D1;&#x7684;&#x4E8B;&#x4EF6;</span>
         setTimeout(() =&gt; {
-            emit(<span class="hljs-string">&quot;user&quot;</span>, { account: <span class="hljs-string">&quot;account&quot;</span> });
-        }, <span class="hljs-number">500</span>);
+            emit(<span class="hljs-string">&quot;user&quot;</span>, {account: <span class="hljs-string">&quot;account&quot;</span>})
+        }, <span class="hljs-number">500</span>)
 
         setTimeout(() =&gt; {
-            emit(<span class="hljs-string">&quot;ready&quot;</span>, <span class="hljs-string">&quot;app is ready&quot;</span>);
-        }, <span class="hljs-number">200</span>);
+            emit(<span class="hljs-string">&quot;ready&quot;</span>, <span class="hljs-string">&quot;app is ready&quot;</span>)
+        }, <span class="hljs-number">200</span>)
     },
     <span class="hljs-comment">// &#x9ED8;&#x8BA4;&#x7ED1;&#x5B9A;&#x7684;vue&#x672C;&#x8EAB;&#x751F;&#x547D;&#x5468;&#x671F;&#x51FD;&#x6570;</span>
     hookDef: <span class="hljs-string">&quot;mounted&quot;</span>,
@@ -338,8 +338,10 @@ Vue.use(VueLife, {
         user: <span class="hljs-string">&quot;created&quot;</span>
     },
     <span class="hljs-comment">// &#x9ED8;&#x8BA4;&#x7684;&#x5BBD;&#x5C55;&#x5B57;&#x6BB5; &#x9ED8;&#x8BA4;&#x4E3A; life</span>
-    lifeName: <span class="hljs-string">&quot;life&quot;</span>
-});
+    lifeName: <span class="hljs-string">&quot;life&quot;</span>,
+    <span class="hljs-comment">// &#x8FD0;&#x884C; init &#x51FD;&#x6570;&#x65F6;&#x8D4B;&#x4E88;&#x7684;&#x989D;&#x5916;&#x53C2;&#x6570;</span>
+    args: []
+})
 </code></pre>
 <pre><code class="lang-javascript"><span class="hljs-comment">// vue&#x4E2D;&#xFF0C;&#x5B9E;&#x9645;&#x89E6;&#x53D1;</span>
 {
@@ -360,188 +362,199 @@ Vue.use(VueLife, {
 <p>npm install vue-life</p>
 </blockquote>
 <h2 id="&#x6E90;&#x4EE3;&#x7801;">&#x6E90;&#x4EE3;&#x7801;</h2>
-<pre><code class="lang-javascript"><span class="hljs-comment">// vue&#x4E2D;&#xFF0C;&#x5B9E;&#x9645;&#x89E6;&#x53D1;</span>
-(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">global, factory</span>) </span>{
+<pre><code class="lang-javascript">;(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">global, factory</span>) </span>{
     <span class="hljs-comment">// UMD &#x52A0;&#x8F7D;&#x65B9;&#x6848;</span>
     <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> exports === <span class="hljs-string">&quot;object&quot;</span> &amp;&amp; <span class="hljs-keyword">typeof</span> <span class="hljs-built_in">module</span> !== <span class="hljs-string">&quot;undefined&quot;</span>) {
-        <span class="hljs-built_in">module</span>.exports = factory();
-        <span class="hljs-keyword">return</span>;
+        <span class="hljs-built_in">module</span>.exports = factory()
+        <span class="hljs-keyword">return</span>
     }
     <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> define === <span class="hljs-string">&quot;function&quot;</span> &amp;&amp; define.amd) {
-        define(factory);
-        <span class="hljs-keyword">return</span>;
+        define(factory)
+        <span class="hljs-keyword">return</span>
     }
-    global.vueLife = factory();
+    global.vueLife = factory()
 })(<span class="hljs-built_in">window</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
-<span class="hljs-meta">    &quot;use strict&quot;</span>;
+<span class="hljs-meta">    &quot;use strict&quot;</span>
 
-    <span class="hljs-comment">// vue&#x4E2D;$options&#x4E2D;&#x7684;&#x53C2;&#x6570;</span>
-    <span class="hljs-keyword">var</span> name = <span class="hljs-string">&quot;life&quot;</span>;
-    <span class="hljs-comment">// &#x8BBE;&#x7F6E;&#x540C;&#x5185;&#x7F6E;&#x751F;&#x547D;&#x5468;&#x671F;&#x51FD;&#x6570;&#x7ED1;&#x5B9A;</span>
-    <span class="hljs-keyword">var</span> hooks = {};
+    <span class="hljs-keyword">var</span> name = <span class="hljs-string">&quot;life&quot;</span>
+    <span class="hljs-keyword">var</span> hooks = {}
+    <span class="hljs-keyword">var</span> hookDef
 
-    <span class="hljs-comment">// &#x81EA;&#x5B9A;&#x4E49;&#x751F;&#x547D;&#x5468;&#x671F;&#x51FD;&#x6570;&#x96C6;&#x5408;</span>
-    <span class="hljs-keyword">var</span> hookLifes = [];
-    <span class="hljs-comment">// &#x89E6;&#x53D1;&#x751F;&#x547D;&#x5468;&#x671F;&#x6570;&#x636E;</span>
-    <span class="hljs-keyword">var</span> hookEmitData = {};
+    <span class="hljs-keyword">var</span> hookLifes = {}
+    <span class="hljs-keyword">var</span> hookEmitData = {}
 
-    <span class="hljs-comment">// &#x89E6;&#x53D1;</span>
-    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_hookExec</span>(<span class="hljs-params">key, that, data</span>) </span>{
-        <span class="hljs-keyword">var</span> lifes = that.$options[name] || [];
+    <span class="hljs-keyword">var</span> lifeIndexNum = <span class="hljs-number">100</span>
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">addHookLifes</span>(<span class="hljs-params">that, vueLifeName</span>) </span>{
+        <span class="hljs-keyword">var</span> id = that._life_id_
+        <span class="hljs-keyword">if</span> (!id) {
+            id = that._life_id_ = <span class="hljs-string">&quot;$&quot;</span> + lifeIndexNum++
+        }
+        <span class="hljs-keyword">var</span> life = hookLifes[id]
+        <span class="hljs-keyword">if</span> (!life) {
+            life = hookLifes[id] = {
+                that: that,
+                ready: {}
+            }
+        }
+        life.ready[vueLifeName] = <span class="hljs-literal">true</span>
+        <span class="hljs-keyword">return</span> life
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_hookExec</span>(<span class="hljs-params">key, life, data</span>) </span>{
+        <span class="hljs-keyword">var</span> lifes = life.that.$options[name] || []
+        <span class="hljs-keyword">var</span> hook = hooks[key] || hookDef
+        <span class="hljs-keyword">if</span> (!life.ready[hook]) {
+            <span class="hljs-keyword">return</span>
+        }
         <span class="hljs-comment">// console.log(&quot;lifes&quot;, lifes)</span>
-        <span class="hljs-keyword">var</span> lifeFn;
+        <span class="hljs-keyword">var</span> lifeFn
         <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; lifes.length; i += <span class="hljs-number">1</span>) {
             <span class="hljs-comment">// debugger;</span>
             <span class="hljs-comment">// console.log(lifes[i])</span>
-            lifeFn = lifes[i][key];
+            lifeFn = lifes[i][key]
             <span class="hljs-keyword">if</span> (lifeFn) {
-                lifeFn.call(that, data.data);
+                lifeFn.call(life.that, data.data)
             }
         }
     }
     <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">hookExec</span>(<span class="hljs-params">key, that</span>) </span>{
-        <span class="hljs-keyword">let</span> data = hookEmitData[key];
+        <span class="hljs-keyword">var</span> data = hookEmitData[key]
         <span class="hljs-comment">// console.log(&quot;1&quot;, key, hookEmitData, that, data)</span>
         <span class="hljs-keyword">if</span> (!data) {
-            <span class="hljs-keyword">return</span>;
+            <span class="hljs-keyword">return</span>
         }
         <span class="hljs-comment">// console.log(&quot;2&quot;, key, hookEmitData, that)</span>
         <span class="hljs-keyword">if</span> (that) {
-            _hookExec(key, that, data);
-            <span class="hljs-keyword">return</span>;
+            _hookExec(key, that, data)
+            <span class="hljs-keyword">return</span>
         }
+        <span class="hljs-comment">// var hook = hooks[key] || hookDef</span>
         <span class="hljs-comment">// console.log(&quot;3&quot;, key, hookEmitData, that)</span>
-        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; hookLifes.length; i += <span class="hljs-number">1</span>) {
-            _hookExec(key, hookLifes[i], data);
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> n <span class="hljs-keyword">in</span> hookLifes) {
+            _hookExec(key, hookLifes[n], data)
         }
     }
 
     <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">hookEmit</span>(<span class="hljs-params">key, data</span>) </span>{
         hookEmitData[key] = {
             data: data
-        };
-        hookExec(key);
+        }
+        hookExec(key)
     }
 
-    <span class="hljs-comment">// Vue&#x6CE8;&#x518C;&#x63D2;&#x4EF6;&#x65B9;&#x6CD5;</span>
     <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">install</span>(<span class="hljs-params">vue, init</span>) </span>{
         <span class="hljs-comment">// &#x521D;&#x59CB;&#x5316;&#x51FD;&#x6570;</span>
         <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> init == <span class="hljs-string">&quot;function&quot;</span>) {
             init = {
                 init: init
-            };
+            }
         }
-        <span class="hljs-keyword">var</span> initFn = init.init;
+        <span class="hljs-keyword">var</span> initFn = init.init
         <span class="hljs-comment">// &#x8BBE;&#x5B9A;&#x5728;&#x4EC0;&#x4E48;&#x94A9;&#x5B50;&#x51FD;&#x6570;&#x4E2D;&#x51FA;&#x53D1;</span>
-        <span class="hljs-keyword">var</span> hookDef = init.hookDef || <span class="hljs-string">&quot;mounted&quot;</span>;
+        hookDef = init.hookDef || <span class="hljs-string">&quot;mounted&quot;</span>
         <span class="hljs-keyword">if</span> (init.hooks) {
-            hooks = init.hooks;
+            hooks = init.hooks
         }
 
-        <span class="hljs-comment">// life &#x540D;&#x79F0;</span>
+        <span class="hljs-comment">// ready &#x540D;&#x79F0;</span>
         <span class="hljs-keyword">if</span> (init.lifeName) {
-            name = init.lifeName;
+            name = init.lifeName
+        }
+
+        <span class="hljs-keyword">var</span> initArgs = init.args || []
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">Object</span>.prototype.toString.call(initArgs).toLowerCase() != <span class="hljs-string">&quot;[object array]&quot;</span>) {
+            initArgs = [initArgs]
         }
 
         <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">hookExecByVM</span>(<span class="hljs-params">that, lifeName</span>) </span>{
+            <span class="hljs-comment">// console.log(&quot;---&quot;, that, lifeName)</span>
             setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
-                <span class="hljs-keyword">var</span> keyOpt = {};
-                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> n <span class="hljs-keyword">in</span> hooks) {
-                    <span class="hljs-keyword">if</span> (hooks[n] == lifeName) {
-                        keyOpt[n] = <span class="hljs-literal">true</span>;
+                <span class="hljs-keyword">var</span> life = addHookLifes(that, lifeName)
+                <span class="hljs-keyword">var</span> lifes = that.$options[name] || []
+                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>, k; i &lt; lifes.length; i += <span class="hljs-number">1</span>) {
+                    <span class="hljs-keyword">for</span> (k <span class="hljs-keyword">in</span> lifes[i]) {
+                        _hookExec(k, life, hookEmitData[k])
                     }
                 }
-                <span class="hljs-keyword">var</span> isDefHook = lifeName == hookDef;
-                <span class="hljs-keyword">var</span> lifes = that.$options[name] || [];
-                <span class="hljs-keyword">var</span> life, k, data;
-                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; lifes.length; i += <span class="hljs-number">1</span>) {
-                    life = lifes[i];
-                    <span class="hljs-keyword">for</span> (k <span class="hljs-keyword">in</span> life) {
-                        data = hookEmitData[k];
-                        <span class="hljs-keyword">if</span> (data &amp;&amp; (keyOpt[k] || isDefHook)) {
-                            life[k].call(that, data.data);
-                        }
-                    }
-                }
-            }, <span class="hljs-number">0</span>);
+            }, <span class="hljs-number">0</span>)
         }
 
         <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">hooksFn</span>(<span class="hljs-params">key</span>) </span>{
             <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
-                <span class="hljs-keyword">var</span> life = <span class="hljs-keyword">this</span>.$options[name];
+                <span class="hljs-keyword">var</span> life = <span class="hljs-keyword">this</span>.$options[name]
                 <span class="hljs-keyword">if</span> (life) {
-                    hookExecByVM(<span class="hljs-keyword">this</span>, key);
+                    hookExecByVM(<span class="hljs-keyword">this</span>, key)
                 }
-            };
+            }
         }
-        <span class="hljs-keyword">var</span> mixinOpt = {};
+        <span class="hljs-keyword">var</span> mixinOpt = {}
         <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> n <span class="hljs-keyword">in</span> hooks) {
             <span class="hljs-keyword">if</span> (!mixinOpt[hooks[n]]) {
-                mixinOpt[hooks[n]] = hooksFn(hooks[n]);
+                mixinOpt[hooks[n]] = hooksFn(hooks[n])
             }
         }
         <span class="hljs-keyword">if</span> (!mixinOpt[hookDef]) {
-            mixinOpt[hookDef] = hooksFn(hookDef);
+            mixinOpt[hookDef] = hooksFn(hookDef)
         }
 
         <span class="hljs-comment">//</span>
-        <span class="hljs-keyword">var</span> beforeCreateFn = mixinOpt.beforeCreate;
-        mixinOpt.beforeCreate = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
-            <span class="hljs-keyword">var</span> life = <span class="hljs-keyword">this</span>.$options[name];
-            <span class="hljs-comment">// console.log(&quot;&gt;&gt;&gt;...&quot;, this.$options[name], name)</span>
-            <span class="hljs-keyword">if</span> (life) {
-                hookLifes.push(<span class="hljs-keyword">this</span>);
-            }
+        <span class="hljs-comment">// var beforeCreateFn = mixinOpt.beforeCreate</span>
+        <span class="hljs-comment">// mixinOpt.beforeCreate = function() {</span>
+        <span class="hljs-comment">//     var life = this.$options[name]</span>
+        <span class="hljs-comment">//     console.log(&quot;&gt;&gt;&gt;...&quot;, this.$options[name], name)</span>
+        <span class="hljs-comment">//     if (life) {</span>
+        <span class="hljs-comment">//         hookLifes.push(this)</span>
+        <span class="hljs-comment">//     }</span>
 
-            <span class="hljs-keyword">if</span> (beforeCreateFn) {
-                beforeCreateFn.call(<span class="hljs-keyword">this</span>);
-            }
-        };
+        <span class="hljs-comment">//     if (beforeCreateFn) {</span>
+        <span class="hljs-comment">//         beforeCreateFn.call(this)</span>
+        <span class="hljs-comment">//     }</span>
+        <span class="hljs-comment">// }</span>
 
         <span class="hljs-comment">// &#x9500;&#x6BC1;</span>
-        <span class="hljs-keyword">var</span> destroyedFn = mixinOpt.destroyed;
+        <span class="hljs-keyword">var</span> destroyedFn = mixinOpt.destroyed
         mixinOpt.destroyed = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
             <span class="hljs-keyword">if</span> (destroyedFn) {
-                destroyedFn.call(<span class="hljs-keyword">this</span>);
+                destroyedFn.call(<span class="hljs-keyword">this</span>)
             }
 
-            <span class="hljs-keyword">var</span> life = <span class="hljs-keyword">this</span>.$options[name];
+            <span class="hljs-keyword">var</span> life = <span class="hljs-keyword">this</span>.$options[name]
             <span class="hljs-keyword">if</span> (life) {
-                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; hookLifes.length; i += <span class="hljs-number">1</span>) {
-                    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span> == hookLifes[i]) {
-                        hookLifes.splice(i, <span class="hljs-number">1</span>);
-                        <span class="hljs-keyword">break</span>;
+                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> n <span class="hljs-keyword">in</span> hookLifes) {
+                    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span> == hookLifes[n].that) {
+                        <span class="hljs-keyword">delete</span> hookLifes[n]
                     }
                 }
             }
-        };
+        }
 
-        <span class="hljs-comment">// &#x5168;&#x5C40;&#x6DF7;&#x5165;vue</span>
-        vue.mixin(mixinOpt);
+        vue.mixin(mixinOpt)
         <span class="hljs-comment">// console.log(&quot;mixinOpt&quot;, mixinOpt)</span>
-        <span class="hljs-comment">// &#x4F7F;&#x5F97;&#x80FD;&#x5728; this.$options&#x83B7;&#x53D6;life&#x5C5E;&#x6027;&#x7684;obj</span>
         vue.config.optionMergeStrategies[name] = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">pVal, nVal</span>) </span>{
-            <span class="hljs-keyword">var</span> val = pVal <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Array</span> ? pVal : pVal ? [pVal] : [];
+            <span class="hljs-keyword">var</span> val = pVal <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Array</span> ? pVal : pVal ? [pVal] : []
             <span class="hljs-keyword">if</span> (nVal) {
-                val.push(nVal);
+                val.push(nVal)
             }
             <span class="hljs-comment">// console.log(val)</span>
-            <span class="hljs-keyword">return</span> val;
-        };
+            <span class="hljs-keyword">return</span> val
+        }
 
         <span class="hljs-keyword">if</span> (initFn) {
-            initFn({
-                emit: hookEmit,
-                vue: vue
-            });
+            initFn(
+                {
+                    emit: hookEmit,
+                    vue: vue
+                },
+                ...initArgs
+            )
         }
     }
 
     <span class="hljs-keyword">return</span> {
         <span class="hljs-keyword">default</span>: install,
         install: install
-    };
-});
+    }
+})
 </code></pre>
 
                                 
@@ -582,7 +595,7 @@ Vue.use(VueLife, {
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"自定义生命周期函数","level":"1.5.2","depth":2,"previous":{"title":"组件通讯","level":"1.5.1","depth":2,"path":"vue/broad-1.md","ref":"vue/broad-1.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"locus","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"fontsettings":{"theme":"white","family":"sans","size":2},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"locus - book","language":"zh-hans","links":{"sidebar":{"github":"https://github.com/szpoppy"}},"gitbook":"3.2.3","description":"locus - book","theme-default":{"showLevel":true}},"file":{"path":"vue/life.md","mtime":"2019-09-17T02:03:15.755Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-09-17T02:05:24.706Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"自定义生命周期函数","level":"1.5.2","depth":2,"previous":{"title":"组件通讯","level":"1.5.1","depth":2,"path":"vue/broad-1.md","ref":"vue/broad-1.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"locus","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"fontsettings":{"theme":"white","family":"sans","size":2},"structure":{"langs":"LANGS.md","readme":"index.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"locus - book","language":"zh-hans","links":{"sidebar":{"github":"https://github.com/szpoppy"}},"gitbook":"3.2.3","description":"locus - book","theme-default":{"showLevel":true}},"file":{"path":"vue/life.md","mtime":"2019-09-18T06:16:00.621Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-09-18T06:16:23.499Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
