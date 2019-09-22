@@ -12,4 +12,3 @@
 -   [Vue](vue/broad-1.md)
     -   [组件通讯](vue/broad-1.md)
     -   [自定义生命周期函数](vue/life.md)
-    
