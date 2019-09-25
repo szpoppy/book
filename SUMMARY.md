@@ -12,3 +12,4 @@
 -   [Vue](vue/broad-1.md)
     -   [组件通讯](vue/broad-1.md)
     -   [自定义生命周期函数](vue/life.md)
+-   [本地存储增强](store/local-store-h5.md)
