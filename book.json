@@ -4,6 +4,9 @@
     "description": "locus - book",
     "language": "zh-hans",
     "gitbook": "3.2.3",
+    "styles": {
+        "website": "website.css"
+    },
     "structure": {
         "readme": "index.md"
     },
