@@ -2,6 +2,10 @@
 
 > 扩展本地存储 localStorage
 
+## 源码
+
+[https://github.com/szpoppy/local-store-h5](https://github.com/szpoppy/local-store-h5)
+
 ## 特点
 
 -   支持设置过期时间
