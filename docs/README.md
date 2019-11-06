@@ -1,6 +1,6 @@
 # 张钰峰的博客
 
--   [轨迹的博客](index.md)
+-   [轨迹的博客](index.md) 
 -   [EventEmitter](eventemitter/eventemitter.md)
 -   [AJAX 是什么](ajax/index.md)
     -   [简单的 AJAX 库](ajax/xmlhttp.md)

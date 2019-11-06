@@ -8,6 +8,7 @@
     -   [关于 AJAX 中的 header](ajax/header.md)
     -   [Ajax - fetch](ajax/fetch.md)
     -   [Ajax 库的实现](ajax/lib.md)
+    -   [Ajax框架request-h5](ajax/request-h5.md)
 -   [正则表达式的使用](regexp/regexp.md)
 -   [Vue](vue/broad-1.md)
     -   [组件通讯](vue/broad-1.md)
