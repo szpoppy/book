@@ -212,7 +212,7 @@ export default vueExecFun(function({$data, $methods, $computed, $mounted}) {
 
 ### 封装高级进阶
 
-> 一下代码相对较长，可以从 530 行左右看起。
+> 以下代码相对较长，可以从 `let fnArg =` 处开始看起。
 
 ```js
 let hasOwnProperty = Object.prototype.hasOwnProperty
