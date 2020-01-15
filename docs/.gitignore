@@ -10,3 +10,4 @@
 *.sln
 *._
 
+node_modules
