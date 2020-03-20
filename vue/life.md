@@ -46,6 +46,7 @@ Vue.use(VueLife, {
         ready (info) {
             // 这个生命周期将在 emit("ready", "app is ready") 和 mounted 之后来触发生命周期（hookDef配置）
             // user 内容为 "app is ready"
+            // x
         }
     }
 }
