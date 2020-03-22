@@ -33,8 +33,8 @@ store.getItem("the-key", "value", -1);
 // 设置本地存储 一天后过期
 store.getItem("the-key", "value", 1);
 
-// 设置本地存储 2200-10-1日过期
-store.getItem("the-key", "value", "2200-10-1");
+// 设置本地存储 2200-10-2日过期
+store.getItem("the-key", "value", "2200-10-2");
 
 // 移除
 store.removeItem("the-key");
