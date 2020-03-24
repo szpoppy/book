@@ -4,3 +4,7 @@ html, body {
 .page-inner {
     max-width: 82% !important;
 }
+
+.z-update{
+    font-size: 1;
+}
